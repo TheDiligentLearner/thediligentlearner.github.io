@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAGK,AAAD,gBAAO,CAAC;EAER,gBAAgB,EAAE,GAAG;CAAM;;AAM1B,AAAD,gBAAO,CAAC;EACJ,KAAK,EAAE,GAAG;CAEb",
+    "sources": [
+        "../../../scss/3-modules/paginator.scss"
+    ],
+    "names": [],
+    "file": "paginator.css"
+}

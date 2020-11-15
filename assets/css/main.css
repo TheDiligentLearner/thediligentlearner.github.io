@@ -1,0 +1,2185 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&family=Roboto+Slab:wght@400;600;800&display=swap");
+/* Global Remedies
+******************/
+/* Use border-box by default, globally */
+*, ::before, ::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/*
+* Consistent line spacing...
+* CSS Inline Layout Module Level 3: https://drafts.csswg.org/css-inline-3/#line-sizing-property
+*/
+html {
+  line-sizing: normal;
+}
+
+/* Remove the tiny space around the edge of the page */
+body {
+  margin: 0;
+}
+
+/* Headings
+***********/
+/* Switch to rem units for headings */
+/* @@@ Initial values are based on existing browser defaults */
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.17rem;
+}
+
+h4 {
+  font-size: 1.00rem;
+}
+
+h5 {
+  font-size: 0.83rem;
+}
+
+h6 {
+  font-size: 0.67rem;
+}
+
+/* Keep h1 margins consistent, even when nested */
+h1 {
+  margin: 0.67em 0;
+}
+
+/* Typography
+*************/
+/* Overflow by default is bad */
+pre {
+  white-space: pre-wrap;
+}
+
+/*
+* 1. Solid, thin horizontal rules
+* 2. Remove Firefox `color: gray`
+* 3. Remove default `1px` height, and common `overflow: hidden`
+*/
+hr {
+  border-style: solid;
+  border-width: 1px 0 0;
+  color: inherit;
+  height: 0;
+  overflow: visible;
+}
+
+/* Embedded Elements
+********************/
+/*
+* 1. Block display is usually what we want
+* 2. Remove strange space-below when inline
+* 3. Responsive by default
+*/
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+/*
+* Maintain intrinsic aspect ratios when `max-width` is applied
+* (iframe, embed, and object have no intrinsic ratio, set height explicitly)
+*/
+img, svg, video, canvas {
+  height: auto;
+}
+
+/*
+* There is no good reason elements default to 300px,
+* and audio files are unlikely to come with a width attribute
+*/
+audio {
+  width: 100%;
+}
+
+/* Old Browsers
+***************/
+/* Remove the border on images inside links in IE 10 and earlier */
+img {
+  border-style: none;
+}
+
+/* Hide the overflow in IE 10 and earlier */
+svg {
+  overflow: hidden;
+}
+
+/* Default block display on HTML5 elements */
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+/*
+* 1. Add the correct box sizing in IE 10
+* 2. Remove the padding in IE 10
+*/
+[type='checkbox'],
+[type='radio'] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+}
+
+/*
+* These are not universally recommended remedies,
+* but they are good to consider,
+* and they might work for you.
+*/
+/* Nav Lists
+************/
+/*
+* List styling is not usually desired in navigation,
+* but this also removes list-semantics for screen-readers
+* See: https://github.com/mozdevs/cssremedy/issues/15
+*/
+nav ul {
+  list-style: none;
+}
+
+/*
+* 1. Add zero-width-space to prevent VoiceOver disable
+* 2. Absolute position ensures no extra space
+* See: https://unfetteredthoughts.net/2017/09/26/voiceover-and-list-style-type-none/
+*/
+nav li:before {
+  content: "\200B";
+  position: absolute;
+}
+
+/* Reduced Motion
+*****************/
+/*
+* 1. Immediately jump any animation to the end point
+* 2. Remove transitions & fixed background attachment
+* See: https://github.com/mozdevs/cssremedy/issues/11
+*/
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    -webkit-animation-delay: -1ms !important;
+            animation-delay: -1ms !important;
+    -webkit-animation-duration: 1ms !important;
+            animation-duration: 1ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    -webkit-transition-delay: 0s !important;
+            transition-delay: 0s !important;
+    -webkit-transition-duration: 0s !important;
+            transition-duration: 0s !important;
+  }
+}
+
+/* Line Heights
+***************/
+/*
+* The default `normal` line-height is tightly spaced, but takes font-metrics into account.
+* Looser spacing may improve readability, but may cause problems in some scripts.
+* See: https://github.com/mozdevs/cssremedy/issues/7
+*/
+html {
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+}
+
+caption, figcaption, label, legend {
+  line-height: 1.375;
+}
+
+/* This is what user agents are supposed to be doing for quotes, 
+according to https://html.spec.whatwg.org/multipage/rendering.html#quotes */
+/*
+
+I believe
+
+:root:lang(af),       :not(:lang(af)) > :lang(af)             { quotes: '\201c' '\201d' '\2018' '\2019' }
+:root:lang(ak),       :not(:lang(ak)) > :lang(ak)             { quotes: '\201c' '\201d' '\2018' '\2019' }
+:root:lang(asa),      :not(:lang(asa)) > :lang(asa)           { quotes: '\201c' '\201d' '\2018' '\2019' }
+
+can be replaced by
+
+:root:lang(af, ak, asa), [lang]:lang(af, ak, asa)       			{ quotes: '\201c' '\201d' '\2018' '\2019' }
+
+*/
+:root {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(af), :not(:lang(af)) > :lang(af) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ak), :not(:lang(ak)) > :lang(ak) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(asa), :not(:lang(asa)) > :lang(asa) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(az), :not(:lang(az)) > :lang(az) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(bem), :not(:lang(bem)) > :lang(bem) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(bez), :not(:lang(bez)) > :lang(bez) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(bn), :not(:lang(bn)) > :lang(bn) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(brx), :not(:lang(brx)) > :lang(brx) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(cgg), :not(:lang(cgg)) > :lang(cgg) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(chr), :not(:lang(chr)) > :lang(chr) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(cy), :not(:lang(cy)) > :lang(cy) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(da), :not(:lang(da)) > :lang(da) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(dav), :not(:lang(dav)) > :lang(dav) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(dje), :not(:lang(dje)) > :lang(dje) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(dz), :not(:lang(dz)) > :lang(dz) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ebu), :not(:lang(ebu)) > :lang(ebu) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ee), :not(:lang(ee)) > :lang(ee) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(en), :not(:lang(en)) > :lang(en) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(fil), :not(:lang(fil)) > :lang(fil) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(fo), :not(:lang(fo)) > :lang(fo) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ga), :not(:lang(ga)) > :lang(ga) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(gd), :not(:lang(gd)) > :lang(gd) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(gl), :not(:lang(gl)) > :lang(gl) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(gu), :not(:lang(gu)) > :lang(gu) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(guz), :not(:lang(guz)) > :lang(guz) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ha), :not(:lang(ha)) > :lang(ha) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(hi), :not(:lang(hi)) > :lang(hi) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(id), :not(:lang(id)) > :lang(id) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ig), :not(:lang(ig)) > :lang(ig) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(jmc), :not(:lang(jmc)) > :lang(jmc) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(kam), :not(:lang(kam)) > :lang(kam) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(kde), :not(:lang(kde)) > :lang(kde) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(kea), :not(:lang(kea)) > :lang(kea) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(khq), :not(:lang(khq)) > :lang(khq) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ki), :not(:lang(ki)) > :lang(ki) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(kln), :not(:lang(kln)) > :lang(kln) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(km), :not(:lang(km)) > :lang(km) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(kn), :not(:lang(kn)) > :lang(kn) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ko), :not(:lang(ko)) > :lang(ko) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ksb), :not(:lang(ksb)) > :lang(ksb) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(lg), :not(:lang(lg)) > :lang(lg) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ln), :not(:lang(ln)) > :lang(ln) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(lo), :not(:lang(lo)) > :lang(lo) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(lrc), :not(:lang(lrc)) > :lang(lrc) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(lu), :not(:lang(lu)) > :lang(lu) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(luo), :not(:lang(luo)) > :lang(luo) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(lv), :not(:lang(lv)) > :lang(lv) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(mas), :not(:lang(mas)) > :lang(mas) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(mer), :not(:lang(mer)) > :lang(mer) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(mfe), :not(:lang(mfe)) > :lang(mfe) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(mgo), :not(:lang(mgo)) > :lang(mgo) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ml), :not(:lang(ml)) > :lang(ml) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(mn), :not(:lang(mn)) > :lang(mn) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(mr), :not(:lang(mr)) > :lang(mr) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ms), :not(:lang(ms)) > :lang(ms) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(mt), :not(:lang(mt)) > :lang(mt) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(my), :not(:lang(my)) > :lang(my) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(naq), :not(:lang(naq)) > :lang(naq) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(nd), :not(:lang(nd)) > :lang(nd) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ne), :not(:lang(ne)) > :lang(ne) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(nus), :not(:lang(nus)) > :lang(nus) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(nyn), :not(:lang(nyn)) > :lang(nyn) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(pa), :not(:lang(pa)) > :lang(pa) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(pt), :not(:lang(pt)) > :lang(pt) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(rof), :not(:lang(rof)) > :lang(rof) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(rwk), :not(:lang(rwk)) > :lang(rwk) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(saq), :not(:lang(saq)) > :lang(saq) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(sbp), :not(:lang(sbp)) > :lang(sbp) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(seh), :not(:lang(seh)) > :lang(seh) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ses), :not(:lang(ses)) > :lang(ses) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(si), :not(:lang(si)) > :lang(si) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(so), :not(:lang(so)) > :lang(so) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(sw), :not(:lang(sw)) > :lang(sw) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(ta), :not(:lang(ta)) > :lang(ta) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(te), :not(:lang(te)) > :lang(te) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(teo), :not(:lang(teo)) > :lang(teo) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(th), :not(:lang(th)) > :lang(th) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(to), :not(:lang(to)) > :lang(to) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(tr), :not(:lang(tr)) > :lang(tr) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(twq), :not(:lang(twq)) > :lang(twq) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(tzm), :not(:lang(tzm)) > :lang(tzm) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(uz-Cyrl), :not(:lang(uz-Cyrl)) > :lang(uz-Cyrl) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(vai), :not(:lang(vai)) > :lang(vai) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(vai-Latn), :not(:lang(vai-Latn)) > :lang(vai-Latn) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(vi), :not(:lang(vi)) > :lang(vi) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(vun), :not(:lang(vun)) > :lang(vun) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(xog), :not(:lang(xog)) > :lang(xog) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(yo), :not(:lang(yo)) > :lang(yo) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(yue-Hans), :not(:lang(yue-Hans)) > :lang(yue-Hans) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(zh), :not(:lang(zh)) > :lang(zh) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(zu), :not(:lang(zu)) > :lang(zu) {
+  quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+/* “ ” ‘ ’ */
+:root:lang(uz), :not(:lang(uz)) > :lang(uz) {
+  quotes: '\201c' '\201d' '\2019' '\2018';
+}
+
+/* “ ” ’ ‘ */
+:root:lang(eu), :not(:lang(eu)) > :lang(eu) {
+  quotes: '\201c' '\201d' '\201c' '\201d';
+}
+
+/* “ ” “ ” */
+:root:lang(tk), :not(:lang(tk)) > :lang(tk) {
+  quotes: '\201c' '\201d' '\201c' '\201d';
+}
+
+/* “ ” “ ” */
+:root:lang(ar), :not(:lang(ar)) > :lang(ar) {
+  quotes: '\201d' '\201c' '\2019' '\2018';
+}
+
+/* ” “ ’ ‘ */
+:root:lang(ur), :not(:lang(ur)) > :lang(ur) {
+  quotes: '\201d' '\201c' '\2019' '\2018';
+}
+
+/* ” “ ’ ‘ */
+:root:lang(fi), :not(:lang(fi)) > :lang(fi) {
+  quotes: '\201d' '\201d' '\2019' '\2019';
+}
+
+/* ” ” ’ ’ */
+:root:lang(he), :not(:lang(he)) > :lang(he) {
+  quotes: '\201d' '\201d' '\2019' '\2019';
+}
+
+/* ” ” ’ ’ */
+:root:lang(lag), :not(:lang(lag)) > :lang(lag) {
+  quotes: '\201d' '\201d' '\2019' '\2019';
+}
+
+/* ” ” ’ ’ */
+:root:lang(rn), :not(:lang(rn)) > :lang(rn) {
+  quotes: '\201d' '\201d' '\2019' '\2019';
+}
+
+/* ” ” ’ ’ */
+:root:lang(sn), :not(:lang(sn)) > :lang(sn) {
+  quotes: '\201d' '\201d' '\2019' '\2019';
+}
+
+/* ” ” ’ ’ */
+:root:lang(sv), :not(:lang(sv)) > :lang(sv) {
+  quotes: '\201d' '\201d' '\2019' '\2019';
+}
+
+/* ” ” ’ ’ */
+:root:lang(sr), :not(:lang(sr)) > :lang(sr) {
+  quotes: '\201e' '\201c' '\2018' '\2018';
+}
+
+/* „ “ ‘ ‘ */
+:root:lang(sr-Latn), :not(:lang(sr-Latn)) > :lang(sr-Latn) {
+  quotes: '\201e' '\201c' '\2018' '\2018';
+}
+
+/* „ “ ‘ ‘ */
+:root:lang(bg), :not(:lang(bg)) > :lang(bg) {
+  quotes: '\201e' '\201c' '\201e' '\201c';
+}
+
+/* „ “ „ “ */
+:root:lang(lt), :not(:lang(lt)) > :lang(lt) {
+  quotes: '\201e' '\201c' '\201e' '\201c';
+}
+
+/* „ “ „ “ */
+:root:lang(bs-Cyrl), :not(:lang(bs-Cyrl)) > :lang(bs-Cyrl) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(cs), :not(:lang(cs)) > :lang(cs) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(cs), :not(:lang(cs)) > :lang(cs) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(de), :not(:lang(de)) > :lang(de) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(dsb), :not(:lang(dsb)) > :lang(dsb) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(et), :not(:lang(et)) > :lang(et) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(hr), :not(:lang(hr)) > :lang(hr) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(hsb), :not(:lang(hsb)) > :lang(hsb) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(is), :not(:lang(is)) > :lang(is) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(lb), :not(:lang(lb)) > :lang(lb) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(luy), :not(:lang(luy)) > :lang(luy) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(mk), :not(:lang(mk)) > :lang(mk) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(sk), :not(:lang(sk)) > :lang(sk) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(sl), :not(:lang(sl)) > :lang(sl) {
+  quotes: '\201e' '\201c' '\201a' '\2018';
+}
+
+/* „ “ ‚ ‘ */
+:root:lang(ka), :not(:lang(ka)) > :lang(ka) {
+  quotes: '\201e' '\201c' '\00ab' '\00bb';
+}
+
+/* „ “ « » */
+:root:lang(bs), :not(:lang(bs)) > :lang(bs) {
+  quotes: '\201e' '\201d' '\2018' '\2019';
+}
+
+/* „ ” ‘ ’ */
+:root:lang(agq), :not(:lang(agq)) > :lang(agq) {
+  quotes: '\201e' '\201d' '\201a' '\2019';
+}
+
+/* „ ” ‚ ’ */
+:root:lang(ff), :not(:lang(ff)) > :lang(ff) {
+  quotes: '\201e' '\201d' '\201a' '\2019';
+}
+
+/* „ ” ‚ ’ */
+:root:lang(nmg), :not(:lang(nmg)) > :lang(nmg) {
+  quotes: '\201e' '\201d' '\00ab' '\00bb';
+}
+
+/* „ ” « » */
+:root:lang(ro), :not(:lang(ro)) > :lang(ro) {
+  quotes: '\201e' '\201d' '\00ab' '\00bb';
+}
+
+/* „ ” « » */
+:root:lang(pl), :not(:lang(pl)) > :lang(pl) {
+  quotes: '\201e' '\201d' '\00ab' '\00bb';
+}
+
+/* „ ” « » */
+:root:lang(hu), :not(:lang(hu)) > :lang(hu) {
+  quotes: '\201e' '\201d' '\00bb' '\00ab';
+}
+
+/* „ ” » « */
+:root:lang(nl), :not(:lang(nl)) > :lang(nl) {
+  quotes: '\2018' '\2019' '\201c' '\201d';
+}
+
+/* ‘ ’ “ ” */
+:root:lang(ti-ER), :not(:lang(ti-ER)) > :lang(ti-ER) {
+  quotes: '\2018' '\2019' '\201c' '\201d';
+}
+
+/* ‘ ’ “ ” */
+:root:lang(dua), :not(:lang(dua)) > :lang(dua) {
+  quotes: '\00ab' '\00bb' '\2018' '\2019';
+}
+
+/* « » ‘ ’ */
+:root:lang(ksf), :not(:lang(ksf)) > :lang(ksf) {
+  quotes: '\00ab' '\00bb' '\2018' '\2019';
+}
+
+/* « » ‘ ’ */
+:root:lang(rw), :not(:lang(rw)) > :lang(rw) {
+  quotes: '\00ab' '\00bb' '\2018' '\2019';
+}
+
+/* « » ‘ ’ */
+:root:lang(nn), :not(:lang(nn)) > :lang(nn) {
+  quotes: '\00ab' '\00bb' '\2018' '\2019';
+}
+
+/* « » ‘ ’ */
+:root:lang(nb), :not(:lang(nb)) > :lang(nb) {
+  quotes: '\00ab' '\00bb' '\2018' '\2019';
+}
+
+/* « » ‘ ’ */
+:root:lang(ast), :not(:lang(ast)) > :lang(ast) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(bm), :not(:lang(bm)) > :lang(bm) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(br), :not(:lang(br)) > :lang(br) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(ca), :not(:lang(ca)) > :lang(ca) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(dyo), :not(:lang(dyo)) > :lang(dyo) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(el), :not(:lang(el)) > :lang(el) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(es), :not(:lang(es)) > :lang(es) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(ewo), :not(:lang(ewo)) > :lang(ewo) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(mg), :not(:lang(mg)) > :lang(mg) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(mua), :not(:lang(mua)) > :lang(mua) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(sg), :not(:lang(sg)) > :lang(sg) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(it), :not(:lang(it)) > :lang(it) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(kab), :not(:lang(kab)) > :lang(kab) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(kk), :not(:lang(kk)) > :lang(kk) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(pt-PT), :not(:lang(pt-PT)) > :lang(pt-PT) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(nnh), :not(:lang(nnh)) > :lang(nnh) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(sq), :not(:lang(sq)) > :lang(sq) {
+  quotes: '\00ab' '\00bb' '\201c' '\201d';
+}
+
+/* « » “ ” */
+:root:lang(bas), :not(:lang(bas)) > :lang(bas) {
+  quotes: '\00ab' '\00bb' '\201e' '\201c';
+}
+
+/* « » „ “ */
+:root:lang(be), :not(:lang(be)) > :lang(be) {
+  quotes: '\00ab' '\00bb' '\201e' '\201c';
+}
+
+/* « » „ “ */
+:root:lang(ky), :not(:lang(ky)) > :lang(ky) {
+  quotes: '\00ab' '\00bb' '\201e' '\201c';
+}
+
+/* « » „ “ */
+:root:lang(sah), :not(:lang(sah)) > :lang(sah) {
+  quotes: '\00ab' '\00bb' '\201e' '\201c';
+}
+
+/* « » „ “ */
+:root:lang(ru), :not(:lang(ru)) > :lang(ru) {
+  quotes: '\00ab' '\00bb' '\201e' '\201c';
+}
+
+/* « » „ “ */
+:root:lang(uk), :not(:lang(uk)) > :lang(uk) {
+  quotes: '\00ab' '\00bb' '\201e' '\201c';
+}
+
+/* « » „ “ */
+:root:lang(zgh), :not(:lang(zgh)) > :lang(zgh) {
+  quotes: '\00ab' '\00bb' '\201e' '\201d';
+}
+
+/* « » „ ” */
+:root:lang(shi), :not(:lang(shi)) > :lang(shi) {
+  quotes: '\00ab' '\00bb' '\201e' '\201d';
+}
+
+/* « » „ ” */
+:root:lang(shi-Latn), :not(:lang(shi-Latn)) > :lang(shi-Latn) {
+  quotes: '\00ab' '\00bb' '\201e' '\201d';
+}
+
+/* « » „ ” */
+:root:lang(am), :not(:lang(am)) > :lang(am) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(az-Cyrl), :not(:lang(az-Cyrl)) > :lang(az-Cyrl) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(fa), :not(:lang(fa)) > :lang(fa) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(fr-CH), :not(:lang(fr-CH)) > :lang(fr-CH) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(gsw), :not(:lang(gsw)) > :lang(gsw) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(jgo), :not(:lang(jgo)) > :lang(jgo) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(kkj), :not(:lang(kkj)) > :lang(kkj) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(mzn), :not(:lang(mzn)) > :lang(mzn) {
+  quotes: '\00ab' '\00bb' '\2039' '\203a';
+}
+
+/* « » ‹ › */
+:root:lang(fr), :not(:lang(fr)) > :lang(fr) {
+  quotes: '\00ab' '\00bb' '\00ab' '\00bb';
+}
+
+/* « » « » */
+:root:lang(hy), :not(:lang(hy)) > :lang(hy) {
+  quotes: '\00ab' '\00bb' '\00ab' '\00bb';
+}
+
+/* « » « » */
+:root:lang(yav), :not(:lang(yav)) > :lang(yav) {
+  quotes: '\00ab' '\00bb' '\00ab' '\00bb';
+}
+
+/* « » « » */
+:root:lang(ja), :not(:lang(ja)) > :lang(ja) {
+  quotes: '\300c' '\300d' '\300e' '\300f';
+}
+
+/* 「 」 『 』 */
+:root:lang(yue), :not(:lang(yue)) > :lang(yue) {
+  quotes: '\300c' '\300d' '\300e' '\300f';
+}
+
+/* 「 」 『 』 */
+:root:lang(zh-Hant), :not(:lang(zh-Hant)) > :lang(zh-Hant) {
+  quotes: '\300c' '\300d' '\300e' '\300f';
+}
+
+/* 「 」 『 』 */
+:root {
+  /* FONTS */
+  --ff-primary: 'Montserrat', sans-serif;
+  --ff-secondary: 'Roboto Slab', serif;
+  --fw-n: 400;
+  --fw-m: 600;
+  --fw-b: 800;
+  --fs-1: 3rem;
+  --fs-2: 2rem;
+  --fs-3: 1.5rem;
+  --fs-4: 1rem;
+  --fs-p: 1rem;
+  --fs-s: 0.7rem;
+  --fs-xs: 0.6rem;
+  /* SPACERS */
+  --spacer: 1rem;
+  --spacer-md: calc(var(--spacer) * 2);
+  --spacer-lg: calc(var(--spacer) * 3);
+  /* BOX DECORATIONS */
+  --shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+  --br: 5px;
+  /* COLORS */
+  --primary-clr-lighter: hsl(189, 49%, 33%);
+  --primary-clr-light: hsl(189, 100%, 33%);
+  --primary-clr: hsl(189, 100%, 24%);
+  --primary-clr-dark: hsl(189, 98%, 18%);
+  --secondary-clr-lighter: hsl(45, 100%, 68%);
+  --secondary-clr-light: hsl(45, 100%, 57%);
+  --secondary-clr: hsl(45, 100%, 43%);
+  --secondary-clr-dark: hsl(45, 100%, 31%);
+  --neutral-clr-lighter: hsl(0, 0%, 97%);
+  --neutral-clr-light: hsl(0, 0%, 90%);
+  --neutral-clr: hsl(0, 0%, 40%);
+  --neutral-clr-dark: hsl(0, 0%, 7%);
+  --mobile-header-height: 75px;
+  --mobile-navbar-height: 55px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+body {
+  border: 0;
+  font-family: var(--ff-primary);
+  font-weight: var(--fw-n);
+  background-color: var(--neutral-clr-lighter);
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: calc(100% - var(--mobile-navbar-height));
+}
+
+.content {
+  width: 100%;
+  overflow-x: hidden;
+  padding: 0;
+  color: var(--neutral-clr-dark);
+  height: 100%;
+  overflow-y: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ff-secondary);
+  font-weight: var(--fw-b);
+}
+
+h1 {
+  font-size: var(--fs-1);
+}
+
+h2 {
+  font-size: var(--fs-2);
+}
+
+h3 {
+  font-size: var(--fs-3);
+}
+
+h4 {
+  font-size: var(--fs-4);
+  font-style: italic;
+}
+
+.social__icon {
+  display: inline-block;
+  height: 40px;
+  width: auto;
+  padding: 10px;
+  fill: var(--neutral-clr);
+}
+
+.social__link {
+  text-decoration: none;
+}
+
+.social__link:hover .social__icon {
+  fill: var(--primary-clr);
+}
+
+.breadcrumbs {
+  display: none;
+  color: var(--neutral-clr);
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.breadcrumbs__separator {
+  color: var(--primary-clr-dark);
+  padding: 0 5px;
+}
+
+.breadcrumbs .menu__icon {
+  fill: var(--neutral-clr);
+  height: 0.8em;
+}
+
+.breadcrumbs .menu__icon:hover {
+  fill: var(--primary-clr);
+}
+
+.breadcrumbs__item.--is-clickable:hover {
+  color: var(--primary-clr);
+}
+
+.header {
+  /* position: relative;
+    top: 0; */
+  width: 100%;
+  /* Replaced vw by % to avoid x-scroll bar*/
+  height: var(--mobile-header-height);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0 20px 0 20px;
+}
+
+.web-logo {
+  height: 55px;
+}
+
+.web-logo__brain {
+  stroke: var(--secondary-clr-light);
+}
+
+.web-logo__silhouette {
+  stroke: var(--primary-clr-light);
+}
+
+.web-name {
+  height: 45px;
+}
+
+.web-name__rg {
+  fill: var(--primary-clr);
+}
+
+.web-name__ogerallart {
+  fill: var(--neutral-clr-lighter);
+}
+
+.web-name__dot {
+  fill: var(--neutral-clr-lighter);
+}
+
+.web-name__net {
+  fill: var(--secondary-clr-light);
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: var(--mobile-navbar-height);
+  overflow-x: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  z-index: 99;
+}
+
+.navbar__btn {
+  margin: 0;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+  height: 100%;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 10;
+  background: var(--neutral-clr-dark);
+  color: var(--neutral-clr-lighter);
+  border: 0;
+  border-radius: 0;
+}
+
+.navbar__btn:focus {
+  outline: 0;
+}
+
+.navbar__btn.-js-is-active {
+  color: var(--primary-clr);
+}
+
+.navbar__btn.-js-is-active .navbar__icon {
+  fill: var(--primary-clr);
+}
+
+.navbar__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  fill: var(--neutral-clr-lighter);
+  height: 1em;
+}
+
+.navbar__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.toc__list {
+  display: block;
+  position: fixed;
+  visibility: hidden;
+  width: 100vw;
+  bottom: var(--mobile-navbar-height);
+  background: black;
+  margin: 0;
+  padding: 0;
+  -webkit-transform: translateY(calc(100% + var(--mobile-navbar-height)));
+          transform: translateY(calc(100% + var(--mobile-navbar-height)));
+  z-index: 1;
+  -webkit-transition: visibility 0s linear 0.3s, -webkit-transform 0.3s ease-in-out;
+  transition: visibility 0s linear 0.3s, -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s, -webkit-transform 0.3s ease-in-out;
+  /* Amagament */
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.toc__list.-js-is-expanded {
+  visibility: visible;
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+  -webkit-transition: -webkit-transform 0.7s ease-in-out;
+  transition: -webkit-transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
+}
+
+.toc__link {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  margin: 0;
+}
+
+.toc__link.-header {
+  background-color: darkgrey;
+}
+
+.toc__link.-subheader {
+  background-color: lightgrey;
+  padding-left: 20px;
+}
+
+.toc__link:visited {
+  color: white;
+}
+
+.toc__link:hover {
+  background-color: var(--primary-clr-dark);
+}
+
+.panel {
+  position: fixed;
+  width: 100%;
+  bottom: var(--mobile-navbar-height);
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  -webkit-transform: translateY(calc(100% + var(--mobile-navbar-height)));
+          transform: translateY(calc(100% + var(--mobile-navbar-height)));
+  -webkit-transition: visibility 0s linear 0.3s, -webkit-transform 0.3s ease-in-out;
+  transition: visibility 0s linear 0.3s, -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s, -webkit-transform 0.3s ease-in-out;
+  /* Amagament */
+}
+
+.panel.-js-is-visible {
+  visibility: visible;
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+  -webkit-transition: -webkit-transform 0.7s ease-in-out;
+  transition: -webkit-transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
+}
+
+.panel__title {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: -2em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 2em;
+  max-width: 70%;
+  z-index: 10;
+  font-size: 16px;
+  color: var(--neutral-clr-lighter);
+  background-color: var(--primary-clr-dark);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 2px solid var(--neutral-clr-dark);
+  border-bottom: none;
+  padding: 0px 20px 0px 20px;
+  border-radius: 7px 7px 0 0;
+  z-index: 10;
+}
+
+.panel__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: var(--neutral-clr-dark);
+  color: var(--neutral-clr-lighter);
+  margin: 0;
+  padding: 0;
+  z-index: 120;
+  font-size: 20px;
+  border: 0;
+  border-top: 2px solid var(--neutral-clr-dark);
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.panel__list--level2 {
+  position: static;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / 3;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2 / 3;
+  max-height: auto;
+  -webkit-transition: max-height 0.8s ease-in-out;
+  transition: max-height 0.8s ease-in-out;
+  -webkit-transform: none;
+          transform: none;
+  padding: 0;
+  overflow: hidden;
+  font-size: 0.8em;
+  border: 0;
+}
+
+.panel__list--level2.-js-is-folded {
+  max-height: 0;
+}
+
+.panel__list--level3 {
+  position: static;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / 3;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2 / 3;
+  max-height: auto;
+  -webkit-transition: max-height 0.8s ease-in-out;
+  transition: max-height 0.8s ease-in-out;
+  -webkit-transform: none;
+          transform: none;
+  overflow: hidden;
+  font-size: 0.8em;
+  font-style: italic;
+  border: 0;
+}
+
+.panel__list--level3.-js-is-folded {
+  max-height: 0;
+}
+
+.panel__item {
+  list-style-type: none;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  border-top: 0;
+  border-bottom: 1.2px solid var(--neutral-clr-lighter);
+}
+
+.panel__item--head {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto min-content;
+      grid-template-columns: auto -webkit-min-content;
+      grid-template-columns: auto min-content;
+  -ms-grid-rows: min-content min-content;
+      grid-template-rows: -webkit-min-content -webkit-min-content;
+      grid-template-rows: min-content min-content;
+}
+
+.panel__item--level2 {
+  padding: 0;
+  margin: 0;
+  border-top: 0.5px solid var(--neutral-clr-lighter);
+  border-bottom: 0;
+}
+
+.panel__item--level3 {
+  padding: 0;
+  margin: 0;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.panel__link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: transparent;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 / 2;
+  margin: 0;
+  padding: 10px 0px 10px 10px;
+  min-height: 50px;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: var(--neutral-clr-lighter);
+  font-size: 18px;
+}
+
+.panel__link--level2 {
+  background-color: transparent;
+  padding-left: 20px;
+}
+
+.panel__link--level3 {
+  background-color: transparent;
+  padding-left: 30px;
+}
+
+.panel__link:visited {
+  color: var(--neutral-clr-lighter);
+}
+
+.panel__link:hover {
+  background-color: var(--primary-clr-dark);
+}
+
+.panel__link:hover + .menu__icon {
+  background-color: var(--primary-clr-dark);
+}
+
+.panel__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 16px;
+  background-color: var(--neutral-clr-dark);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2 / 3;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 / 2;
+  -webkit-transform: rotateZ(0deg);
+          transform: rotateZ(0deg);
+  background-color: transparent;
+}
+
+.panel__icon:hover {
+  color: var(--primary-clr);
+}
+
+.panel__icon.-js-is-pressed {
+  -webkit-transform: rotateZ(90deg);
+          transform: rotateZ(90deg);
+}
+
+.menu__icon {
+  fill: var(--neutral-clr-lighter);
+  height: 16px;
+}
+
+/*
+
+nav
+    ul.menu__list
+        li.menu__item
+            a.menu__link
+        li.menu__item
+            a.menu__link
+        li.menu__item menu__item--head
+            a.menu__link 
+            span.menu__icon
+            ul.menu__list menu__list--level2
+                li.menu_item menu__item--level2
+                a.menu__link menu__item--level2    
+
+
+*/
+.footer {
+  font-size: 12px;
+  color: var(--neutral-clr);
+  text-align: center;
+}
+
+.footer__disclaimer {
+  text-decoration: underline;
+}
+
+.taxonomy {
+  --ft-sz-term: var(--fs-s);
+  --ft-sz-count: var(--fs-xs);
+  --ft-clr-term: var(--neutral-clr-dark);
+  --ft-clr-count: var(--neutral-clr-dark);
+  --bg-clr-term: var(--neutral-clr-lighter);
+  --bg-clr-count: var(--neutral-clr-light);
+  --border-term: 1px solid var(--neutral-clr);
+  --border-count: 1px solid var(--neutral-clr);
+  --border-radius-term: var(--br);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.taxonomy.--centered {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.taxonomy__term {
+  font-size: var(--ft-sz-term);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: var(--bg-clr-term);
+  color: var(--ft-clr-term);
+  padding: 0.1em 0.5em;
+  margin: 0.2em 0.1em;
+  border: var(--border-term);
+  border-radius: var(--border-radius-term);
+  list-style-type: none;
+}
+
+.taxonomy__term:hover {
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+}
+
+.taxonomy__count {
+  font-size: var(--ft-sz-count);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: var(--bg-clr-count);
+  color: var(--ft-clr-count);
+  border: var(--border-count);
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+}
+
+.tag__term {
+  --border-term: 0;
+  --border-count: 0;
+  --bg-clr-term: var(--secondary-clr-lighter);
+  --ft-clr-count: var(--neutral-clr);
+}
+
+.tag__term.--is-active {
+  --bg-clr-term: var(--secondary-clr-light);
+}
+
+.category__term {
+  --border-term: 0;
+  --border-count: 0;
+  --bg-clr-term: var(--primary-clr-lighter);
+  --ft-clr-count: var(--neutral-clr);
+}
+
+.category__term.--is-active {
+  --bg-clr-term: var(--primary-clr-light);
+}
+
+.article__cover-picture {
+  width: 100%;
+  max-height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.article__summary {
+  text-align: justify;
+  font-style: italic;
+}
+
+.article__content {
+  text-align: justify;
+  font-style: normal;
+}
+
+.article__content h2, .article__content h3, .article__content h4 {
+  margin-top: 20px;
+}
+
+.articles-list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1em;
+  background-color: var(--neutral-clr-lighter);
+  margin: 20px 0;
+}
+
+.articles-list__title {
+  font-size: var(--fs-2);
+}
+
+.articles-list__link:hover {
+  color: var(--primary-clr-dark);
+}
+
+.articles-list__data {
+  font-size: var(--fs-p);
+}
+
+.articles-list__summary {
+  font-size: var(--fs-p);
+  font-style: italic;
+  text-align: justify;
+}
+
+.date__group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  font-size: var(--fs-p);
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.date__icon {
+  width: 1em;
+  fill: var(--neutral-clr);
+}
+
+.date__item.--creation {
+  color: var(--neutral-clr);
+  margin: 0 0.3125em;
+}
+
+.date__item.--lastmod {
+  color: var(--secondary-clr-light);
+}
+
+.taxonomy__group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: normal;
+      -ms-flex-align: normal;
+          align-items: normal;
+  font-size: var(--fs-p);
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.taxonomy__icon {
+  width: 1em;
+  fill: var(--neutral-clr);
+}
+
+.taxonomy__item.--creation {
+  color: var(--neutral-clr);
+  margin: 0 0.3125em;
+}
+
+.taxonomy__item.--lastmod {
+  color: var(--secondary-clr-light);
+}
+
+.article__categories {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.article__categories span {
+  margin: 0 10px;
+  fill: red;
+}
+
+.paginator__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.paginator__list.--is-centered {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.paginator__previous {
+  margin-right: 15px;
+}
+
+.paginator__next {
+  margin-left: 15px;
+}
+
+.paginator__link {
+  margin: auto 10px;
+}
+
+.paginator__link:hover {
+  color: var(--primary-clr-dark);
+}
+
+.paginator__link.--is-current {
+  font-weight: var(--fw-m);
+}
+
+.paginator__link.--is-disabled {
+  color: var(--neutral-clr-light);
+}
+
+.headline-hash_icon {
+  display: inline-block;
+  fill: var(--neutral-clr-light);
+  height: auto;
+  width: 0.8em;
+  line-height: -1em;
+}
+
+.headline-hash_icon:hover {
+  fill: var(--primary-clr-lighter);
+}
+
+/* HOME page */
+.home__container {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+.home__title {
+  font-size: 10vw;
+}
+
+.home__section {
+  height: calc(100 * var(--screen-vh) + var(--mobile-navbar-height));
+  min-height: 600px;
+  /* Fallback for browsers that do not support Custom Properties */
+  width: 100vw;
+  padding: 20px;
+}
+
+.home__cover {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: top;
+      -ms-flex-pack: top;
+          justify-content: top;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#D9A300), to(#000000));
+  background-image: linear-gradient(to bottom, #D9A300, #000000);
+  background-attachment: fixed;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%);
+          clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%);
+  margin-bottom: -40px;
+  padding-bottom: calc(var(--mobile-navbar-height) + 60px);
+}
+
+.home__cover .web-logo {
+  width: 60vw;
+  height: auto;
+  margin-top: 3rem;
+}
+
+.home__cover .web-logo__head, .home__cover .web-logo__brain {
+  stroke: white;
+  opacity: 0.66;
+  stroke-width: 0.6;
+}
+
+.home__cover .web-name {
+  width: 60vw;
+  height: auto;
+  margin-top: 50px;
+  fill: white;
+}
+
+.home__cover .web-name__light-text {
+  opacity: 0.66;
+}
+
+.home__cover::after {
+  content: "V";
+  color: white;
+  position: absolute;
+  bottom: 10px;
+}
+
+.home__cover p {
+  text-align: center;
+  color: var(--neutral-clr-lighter);
+  font-size: 14px;
+  font-style: italic;
+  padding: 0.5em 3em;
+}
+
+.home__cover .web-logo__head {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  -webkit-animation: dash 100s linear forwards;
+          animation: dash 100s linear forwards;
+}
+
+.home__cover .web-logo__brain {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  -webkit-animation: dash 80s linear forwards;
+          animation: dash 80s linear forwards;
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.home__about {
+  padding-top: 17vh;
+}
+
+.home__about h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.home__articles {
+  color: white;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.45)), to(rgba(0, 0, 0, 0.45))), url("/assets/img/home__articles-small.jpg") no-repeat fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("/assets/img/home__articles-small.jpg") no-repeat fixed;
+  background-size: cover;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%);
+          clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%);
+  margin-bottom: -40px;
+}
+
+.article__title {
+  color: var(--neutral-clr-dark);
+  font-size: 34px;
+}
+
+.article__date {
+  color: var(--secondary-clr-dark);
+  margin: 10px 0;
+  font-size: 12px;
+}
+
+.article__date-icon {
+  font-size: 12px;
+  vertical-align: -2px;
+  padding-right: 5px;
+}
+
+.article__category {
+  color: var(--neutral-clr);
+  margin: 10px 0;
+  font-size: 12px;
+}
+
+.article__category-icon {
+  font-size: 12px;
+  vertical-align: -2px;
+  padding-right: 5px;
+}
+
+.article__content {
+  color: var(--neutral-clr-darker);
+  padding: 0;
+  margin: 0;
+  text-align: justify;
+}
+
+.article__see-also {
+  color: var(--neutral-clr-darker);
+  background-color: var(--primary-clr-lighter);
+  height: 40px;
+  padding: 10px;
+  margin: 20px 0 20px 0;
+  border-left: solid 10px var(--secondary-clr);
+}
+
+.article__tags {
+  color: var(--neutral-clr-darker);
+  background-color: var(--secondary-clr-lighter);
+  height: 40px;
+  padding: 10px;
+  margin: 20px 0 20px 0;
+  border-left: solid 10px var(--primary-clr);
+}
+
+.article__comments {
+  color: var(--neutral-clr-darker);
+  background-color: var(--neutral-clr-light);
+  height: 70px;
+  padding: 10px;
+  margin: 20px 0 20px 0;
+  border-left: solid 10px var(--secondary-clr);
+}
+
+.archive__group {
+  margin: 20px 0;
+}
+
+.archive__list {
+  list-style: none;
+}
+
+.archive__link:hover {
+  color: var(--primary-clr);
+}
+
+.archive__lastmod {
+  color: var(--secondary-clr);
+  font-size: var(--fs-s);
+  font-style: italic;
+}
+
+.archive__created {
+  font-weight: var(--fw-m);
+}
+/*# sourceMappingURL=main.css.map */
